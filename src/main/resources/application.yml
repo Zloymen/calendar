@@ -1,0 +1,24 @@
+app:
+  data:
+    format: dd-MM-yyyy
+    api-token: 109127578e71533da5cbefd02e50211b
+    url: https://data.gov.ru/api/json/dataset/7708660670-proizvcalendar/version/20151123T183036/content/
+
+
+server:
+  port: 7788
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:/changelog.xml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/calendar?reWriteBatchedInserts=true
+    driver-class-name: org.postgresql.Driver
+    username: calendar
+    password: calendar
+
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50

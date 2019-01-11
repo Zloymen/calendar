@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <changeSet author="zloy" id="1">
+        <comment>
+            add table work_calendar
+        </comment>
+        <createTable tableName="work_calendar">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="work_calendar_pkey"/>
+            </column>
+            <column name="month" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="year" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="zloy" id="2">
+        <comment>
+            add table no_work_day
+        </comment>
+        <createTable tableName="no_work_day">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="no_work_day_pkey"/>
+            </column>
+
+            <column name="work_calendar_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="day" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <addForeignKeyConstraint baseTableName="no_work_day" baseColumnNames="work_calendar_id"
+                                 constraintName="no_work_day__work_calendar__fk"
+                                 referencedTableName="work_calendar" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
