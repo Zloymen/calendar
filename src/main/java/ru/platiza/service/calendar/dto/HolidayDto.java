@@ -1,5 +1,6 @@
 package ru.platiza.service.calendar.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class HolidayDto {
 
+    @ApiModelProperty(notes = "Праздничный день")
     private LocalDate day;
 
+    @ApiModelProperty(
+            notes = "Тип праздничного дня",
+            example = "HOLIDAY - праздничный, PREHOLIDAY - предпразничный, TRANSFER_HOLIDAY - перенесенный день")
     private TypeDay type;
 
 }

@@ -1,6 +1,7 @@
 package ru.platiza.service.calendar.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.platiza.service.calendar.dao.HolidayDao;
 import ru.platiza.service.calendar.dto.HolidayDto;
@@ -17,6 +18,7 @@ public class CalendarServiceImp implements CalendarService {
 
     private final ConverterService converterService;
 
+    @Cacheable("calendarByDayBetween")
     @Override
     public List<HolidayDto> getHolidayDtoBetween(LocalDate first, LocalDate last) {
         return holidayDao.getAllByDayBetween(first, last).stream()
@@ -24,6 +26,7 @@ public class CalendarServiceImp implements CalendarService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable("checkDay")
     @Override
     public Boolean checkHoliday(LocalDate day) {
         return holidayDao.isHoliday(day).isPresent();

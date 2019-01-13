@@ -4,6 +4,7 @@ package ru.platiza.service.calendar.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -40,6 +41,7 @@ public class DataGovServiceImp implements DataGovService {
 
 
     @Transactional
+    @CacheEvict(value = {"calendarByDayBetween", "checkDay"}, allEntries = true)
     @Override
     public void updateCalendarByYear(Integer year) {
         UriComponentsBuilder builder = fromHttpUrl(url).queryParam("access_token", token).queryParam("search", year);
@@ -47,7 +49,7 @@ public class DataGovServiceImp implements DataGovService {
         AnswerDto[] dtos = template.getForObject(builder.toUriString(), AnswerDto[].class);
 
 
-        if (dtos == null) throw new CalendarError(CalendarErrorEnum.GOV_DATA_NOT_FOUND);
+        if (dtos.length == 0) throw new CalendarError(CalendarErrorEnum.GOV_DATA_NOT_FOUND);
 
         AnswerDto dto = dtos[0];
 

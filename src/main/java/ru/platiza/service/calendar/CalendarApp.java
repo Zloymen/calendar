@@ -9,13 +9,21 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.Formatter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +33,9 @@ import java.util.Locale;
 @SpringBootApplication
 @EnableJpaRepositories("ru.platiza.service.calendar.dao")
 @EnableTransactionManagement
+@EnableScheduling
+@EnableCaching
+@EnableSwagger2
 public class CalendarApp {
 
     @Value("${app.data.format}")
@@ -53,14 +64,6 @@ public class CalendarApp {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
-/*        objectMapper.setVisibility(objectMapper.getSerializationConfig()
-                .getDefaultVisibilityChecker()
-                .withCreatorVisibility(JsonAutoDetect.Visibility.NONE)
-                .withFieldVisibility(JsonAutoDetect.Visibility.NONE)
-                .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
-                .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE)
-                .withSetterVisibility(JsonAutoDetect.Visibility.ANY));*/
-
         javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(formatter));
         javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(formatter));
 
@@ -82,6 +85,28 @@ public class CalendarApp {
                 return formatter.format(object);
             }
         };
+    }
+
+    @Bean
+    public Docket productApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .useDefaultResponseMessages(false)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("ru.platiza.service.calendar.controller"))
+
+                .build()
+                .apiInfo(apiInfo());
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfo(
+                "Calendar russian holidays REST API",
+                "Description current API.",
+                "0.0.1",
+                null,
+                null,
+                null,
+                null, Collections.emptyList());
     }
 
     public static void main(String[] args) {
