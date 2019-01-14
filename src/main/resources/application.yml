@@ -1,7 +1,7 @@
 app:
   data:
     format: dd-MM-yyyy
-    token: 109127578e71533da5cbefd02e50211b
+    token: <add you token data.gov.ru>
     url: https://data.gov.ru/api/json/dataset/7708660670-proizvcalendar/version/20151123T183036/content/
     #cron-update-task: '0 0 10 * * MON-FRI' # в 10 часов каждого буднего дня
     cron-update-task: '* */5 * * * *'

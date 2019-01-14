@@ -15,7 +15,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=calendar
       - SPRING_DATASOURCE_PASSWORD=calendar
       - SERVER_PORT=6767
-      - APP_DATA_TOKEN=109127578e71533da5cbefd02e50211b
+      - APP_DATA_TOKEN=<add you token data.gov.ru>
     links:
       - db
     ports:
