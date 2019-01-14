@@ -36,7 +36,7 @@ public class DataGovServiceImp implements DataGovService {
     @Value("${app.data.url}")
     private String url;
 
-    @Value("${app.data.api-token}")
+    @Value("${app.data.token}")
     private String token;
 
 

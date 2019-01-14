@@ -1,0 +1,23 @@
+version: '2'
+services:
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=calendar
+      - POSTGRES_PASSWORD=calendar
+      - POSTGRES_DB=calendar
+
+  calendar:
+    image: platiza/calendar:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/calendar
+      - SPRING_DATASOURCE_USERNAME=calendar
+      - SPRING_DATASOURCE_PASSWORD=calendar
+      - SERVER_PORT=6767
+      - APP_DATA_TOKEN=109127578e71533da5cbefd02e50211b
+    links:
+      - db
+    ports:
+      - "7766:6767"
+
