@@ -1,33 +1,32 @@
 app:
   data:
     format: dd-MM-yyyy
-    api-token: 109127578e71533da5cbefd02e50211b
+    api-token: <>
     url: https://data.gov.ru/api/json/dataset/7708660670-proizvcalendar/version/20151123T183036/content/
     #cron-update-task: '0 0 10 * * MON-FRI' # в 10 часов каждого буднего дня
     cron-update-task: '* */5 * * * *'
 
 
-server:
-  port: 7788
 spring:
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:/changelog.xml
   datasource:
-    url: jdbc:postgresql://localhost:5432/calendar?reWriteBatchedInserts=true
-    driver-class-name: org.postgresql.Driver
-    username: calendar
-    password: calendar
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
   jpa:
     properties:
       hibernate:
+        ddl-auto: create-drop
         jdbc:
           batch_size: 50
           lob:
             non_contextual_creation: true
       temp:
         use_jdbc_metadata_defaults: false
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
 
   task:
     scheduling:

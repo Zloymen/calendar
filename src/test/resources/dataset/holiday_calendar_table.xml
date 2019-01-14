@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+    <holiday_calendar id="100500" day="2018-01-01" type="HOLIDAY"/>
+    <holiday_calendar id="100501" day="2018-01-02" type="HOLIDAY"/>
+    <holiday_calendar id="100502" day="2018-01-03" type="HOLIDAY"/>
+    <holiday_calendar id="100503" day="2018-01-04" type="HOLIDAY"/>
+    <holiday_calendar id="100504" day="2018-01-05" type="HOLIDAY"/>
+    <holiday_calendar id="100505" day="2018-02-22" type="PREHOLIDAY"/>
+</dataset>

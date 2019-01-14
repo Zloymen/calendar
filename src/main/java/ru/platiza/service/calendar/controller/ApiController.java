@@ -1,6 +1,9 @@
 package ru.platiza.service.calendar.controller;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,12 @@ public class ApiController {
     private final DataGovService govService;
 
     private final CalendarService calendarService;
+
+/*    @Autowired
+    public ApiController(DataGovService govService, CalendarService calendarService){
+        this.calendarService = calendarService;
+        this.govService = govService;
+    }*/
 
     @ApiOperation(value = "Обновить справочник за год")
     @ApiResponses(value = {
@@ -49,7 +58,7 @@ public class ApiController {
             @ApiResponse(code = 500, message = "Произошла ошибка"),
     })
     @GetMapping("/isHoliday")
-    public Boolean getDayBetween(@RequestParam LocalDate day){
+    public Boolean isHoliday(@RequestParam LocalDate day){
         return calendarService.checkHoliday(day);
     }
 
