@@ -12,5 +12,5 @@ import ru.platiza.service.calendar.CalendarApp;
 @TestExecutionListeners(DbUnitTestExecutionListener.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {CalendarApp.class})
 @DirtiesContext
-public class AbstractRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
+public abstract class AbstractRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 }

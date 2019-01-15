@@ -10,6 +10,8 @@ public class TestData {
 
     public final static LocalDate FIRST_DAY_JANUARY = LocalDate.of(2018, 1, 1);
     public final static LocalDate LAST_DAY_JANUARY = LocalDate.of(2018, 1, 31);
+    public final static LocalDate NOT_HOLIDAY_DAY = LocalDate.of(2018,2, 22);
+    public final static LocalDate NOT_HOLIDAY_DAY2 = LocalDate.of(2018,3, 3);
 
     public final static Holiday HOLIDAY = new Holiday(100500L, FIRST_DAY_JANUARY, TypeDay.HOLIDAY);
 

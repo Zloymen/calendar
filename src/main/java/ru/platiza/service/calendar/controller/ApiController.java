@@ -24,12 +24,6 @@ public class ApiController {
 
     private final CalendarService calendarService;
 
-/*    @Autowired
-    public ApiController(DataGovService govService, CalendarService calendarService){
-        this.calendarService = calendarService;
-        this.govService = govService;
-    }*/
-
     @ApiOperation(value = "Обновить справочник за год")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Обновление прошло успешно"),

@@ -15,7 +15,7 @@ public class ScheduledService {
 
     private final DataGovService dataGovService;
 
-    //@Scheduled(cron = "${app.data.cron-update-task}")
+    @Scheduled(cron = "${app.data.cron-update-task}")
     public void autoUpdateCalendar() {
         dataGovService.updateCalendarByYear(LocalDate.now().getYear());
         dataGovService.updateCalendarByYear(LocalDate.now().getYear() + 1);

@@ -10,7 +10,7 @@ app:
 spring:
   liquibase:
     enabled: false
-    change-log: classpath:/changelog.xml
+    change-log: classpath:/changelog123.xml
   datasource:
     url: jdbc:h2:mem:test
     driver-class-name: org.h2.Driver
