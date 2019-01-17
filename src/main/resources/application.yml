@@ -10,6 +10,8 @@ app:
 server:
   port: 7788
 spring:
+  application:
+    name: WorkCalendar
   liquibase:
     enabled: true
     change-log: classpath:/changelog.xml

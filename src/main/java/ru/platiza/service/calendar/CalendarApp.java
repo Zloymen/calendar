@@ -18,6 +18,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
+import ru.platiza.service.calendar.interceptor.MediaTypeInterceptor;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -41,12 +42,13 @@ public class CalendarApp {
     private String dateFormat;
 
     @Bean
-    RestTemplate restTemplate(){
+    public RestTemplate restTemplate(){
 
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
         restTemplate.setMessageConverters(Collections.singletonList(converter));
+        restTemplate.getInterceptors().add(new MediaTypeInterceptor());
         return restTemplate;
     }
 

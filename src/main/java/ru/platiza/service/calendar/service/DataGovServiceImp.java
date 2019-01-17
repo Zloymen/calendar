@@ -49,7 +49,7 @@ public class DataGovServiceImp implements DataGovService {
         AnswerDto[] dtos = template.getForObject(builder.toUriString(), AnswerDto[].class);
 
 
-        if (dtos.length == 0) throw new CalendarError(CalendarErrorEnum.GOV_DATA_NOT_FOUND);
+        if (dtos == null || dtos.length == 0) throw new CalendarError(CalendarErrorEnum.GOV_DATA_NOT_FOUND);
 
         AnswerDto dto = dtos[0];
 
